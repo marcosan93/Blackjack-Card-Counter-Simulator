@@ -64,7 +64,9 @@ def dealer_turn(your_hand, dealer_hand, total, dtotal, deck, turn=True):
     # Looping through the moves
     while turn:
         total  = hand_total(your_hand)
-        if total > 21: # Evaluating a player's hand to see if they have an ace
+        if total > 21: 
+            
+            # Evaluating a player's hand to see if they have an ace
             check_ace(your_hand)
             total = hand_total(your_hand)
             player_print(your_hand, total)
@@ -73,25 +75,30 @@ def dealer_turn(your_hand, dealer_hand, total, dtotal, deck, turn=True):
         dtotal = hand_total(dealer_hand)
         dealer_print(dealer_hand, dtotal)
 
-        while dtotal <= 16: # Dealing cards to the dealer if they have less than or equal to 16
+        while dtotal <= 16: 
+            
+            # Dealing cards to the dealer if they have less than or equal to 16
             deal_card(dealer_hand, deck)
             dtotal = hand_total(dealer_hand)
             dealer_print(dealer_hand, dtotal)
-
-        if dtotal == 21: # Checking if the dealer wins
+            
+        # Checking if the dealer wins
+        if dtotal == 21: 
             print("Game Over. House wins.")
             loss += 1
             break
-
-        elif dtotal > 21: # Checking if the dealer busts
+        
+        # Checking if the dealer busts
+        elif dtotal > 21: 
             if check_ace(dealer_hand):
                 continue
             else:
                 print("Dealer busts! You win!")
                 wins += 1
                 break
-
-        elif 17 <= dtotal <= 21: # Comparing dealer hand to player hand
+                
+        # Comparing dealer hand to player hand
+        elif 17 <= dtotal <= 21: 
             if dtotal > total:
                 print("Game Over. House wins")
                 loss += 1
@@ -115,7 +122,8 @@ def play_again():
     """
     Loops the game
     """
-    while True: # Asking the player to play again or not
+    while True: 
+        # Asking the player to play again or not
         ans = input("Play again? \n").lower()
         if ans == 'yes' or ans == 'y':
             return True
@@ -161,28 +169,39 @@ def blackjack(deck):
         # Allowing the player to make a move
         move = input("Hit or stay? ").lower()
         
-        if move == "hit":
+        if move == "hit" or move == "h":
             deal_card(your_hand, deck)
             total = hand_total(your_hand)
-            if  total > 21:              # Checking if the player busts
-                if check_ace(your_hand): # Checking for an ace in the player hand
+            
+            # Checking if the player busts
+            if  total > 21:              
+                
+                # Checking for an ace in the player hand
+                if check_ace(your_hand): 
                     total = hand_total(your_hand)
                     player_print(your_hand, total)
                     continue
-                else:                    # Otherwise they bust
+                    
+                # Otherwise they bust
+                else:                    
                     player_print(your_hand, total)
                     print("Dealer wins. You lose.")
                     loss += 1
                     break
-            elif total < 21:             # Going back to asking the player for a move
+            
+            elif total < 21:             
                 player_print(your_hand, total)
+                
+                # Going back to asking the player for a move
                 continue
-            elif total == 21:            # Checking if the player succeeded in achieving blackjack
+                
+            # Checking if the player succeeded in achieving blackjack
+            elif total == 21:            
                 player_print(your_hand, total)
                 print("Blackjack! You win!")
                 wins += 1
                 break
-        elif move == "stay":
+        elif move == "stay" or move == "s":
             total  = hand_total(your_hand)
             dtotal = hand_total(dealer_hand)
             
@@ -207,7 +226,7 @@ def play_blackjack():
     """
     Looping the game until no cards left
     """
-    deck = create_deck()
+    deck = create_deck(6)
     
     play = True
     wins = 0
@@ -222,10 +241,10 @@ def play_blackjack():
         wins += game[0]
         rounds_played += sum(game)
         
-        print("Wins: ", result, '/', rounds_played)
+        print("Wins: ", wins, '/', rounds_played)
         
         # Determining if there are enough cards left
-        if len(deck) < 6:
+        if len(deck) < 12:
             print("Not enough cards left. Game over.")
             break
         play = play_again()
