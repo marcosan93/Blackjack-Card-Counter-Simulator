@@ -1,5 +1,5 @@
-# Blackjack_Simulator
-Simulate 1,000+ games for each card counting strategy in Blackjack.
+# Blackjack Card Counting Strategy Simulator
+Simulating 1,000+ games for each card counting strategy in Blackjack.
 
 [Medium Article regarding the process](https://medium.com/@marcosan93/beating-the-dealer-with-simple-statistics-71b5e3701638?sk=d74eeba7c550fac9d1c6a62ecf104e7e)
 
